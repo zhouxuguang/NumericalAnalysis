@@ -3,4 +3,7 @@ project(NumericalAnalysis)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(NumericalAnalysis main.cpp)
+add_executable(NumericalAnalysis main.cpp
+        Matrix.cpp
+        Matrix.h
+        PreDefine.h)
