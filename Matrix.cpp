@@ -33,6 +33,11 @@ double *Matrix::operator[](int row)
     return mData + (row * mWidth);
 }
 
+const double *Matrix::operator[](int row) const
+{
+    return mData + (row * mWidth);
+}
+
 void Matrix::SwapRows(int row1, int row2)
 {
     double *row1Data = mData + (row1 * mWidth);
@@ -57,5 +62,10 @@ int Matrix::GetColumnMaxAbsElementIndex(int col, int startRow, int endRow)
         }
     }
     return rowIndex;
+}
+
+void Matrix::AddKScaleToOther(int row1, double scaleFactor, int row2)
+{
+
 }
 
