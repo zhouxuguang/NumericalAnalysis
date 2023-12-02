@@ -12,7 +12,7 @@ class LinearSystem
 {
 public:
     /**
-     * 选主元高斯消元法
+     * 列主元高斯消元法
      * @param A
      * @param B
      * @param X

@@ -8,4 +8,6 @@ add_executable(NumericalAnalysis main.cpp
         Matrix.h
         PreDefine.h
         LinearSystem.cpp
-        LinearSystem.h)
+        LinearSystem.h
+        TestLinearSystem.cpp
+        TestLinearSystem.h)

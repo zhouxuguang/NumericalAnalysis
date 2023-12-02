@@ -35,7 +35,7 @@ public:
     void SwapRows(int row1, int row2);
 
     /**
-     * 将第row1行的scaleFactor加到第row2行
+     * 将第row1行的scaleFactor加到第row2行，这个先不用吧
      * @param row1
      * @param scaleFactor
      * @param row2
