@@ -18,6 +18,14 @@ public:
      * @param X
      */
     static void GaussElimination(const Matrix& A, const Vector& B, Vector &X);
+
+    /**
+     * 雅可比迭代解线性方程组
+     * @param A
+     * @param B
+     * @param X
+     */
+    static void JacobiIteration(const Matrix& A, const Vector& B, Vector &X);
 };
 
 

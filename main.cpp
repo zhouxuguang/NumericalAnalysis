@@ -4,7 +4,7 @@
 
 int main()
 {
-    TestLinearSystem2();
+    TestLinearSystemJacobi();
 
     return 0;
 }

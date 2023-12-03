@@ -3,6 +3,8 @@
 //
 
 #include "LinearSystem.h"
+#include <limits>
+#include <iostream>
 
 void LinearSystem::GaussElimination(const Matrix &A, const Vector &B, Vector &X)
 {
@@ -17,7 +19,7 @@ void LinearSystem::GaussElimination(const Matrix &A, const Vector &B, Vector &X)
     int height = A.GetHeight();
     int width = extendMat.GetWith();
 
-    //每一行逐步进行消元
+    //每一行逐步进行消元，即遍历对角元
     for (int k = 0; k < height - 1; ++k)
     {
         int maxIndex = extendMat.GetColumnMaxAbsElementIndex(k, k, height - 1);
@@ -52,5 +54,55 @@ void LinearSystem::GaussElimination(const Matrix &A, const Vector &B, Vector &X)
         }
 
         X[i] = (extendMat[i][width - 1] - sum) / extendMat[i][i];
+    }
+}
+
+void LinearSystem::JacobiIteration(const Matrix &A, const Vector &B, Vector &X)
+{
+    int width = A.GetWith();
+    int height = A.GetHeight();
+    assert(width == height);
+
+    Vector X0;
+    X0.resize(X.size());
+    memset(X0.data(), 0, X0.size() * sizeof(double));
+
+    Vector diffVec;
+    diffVec.resize(X.size());
+
+    while (true)
+    {
+        for (int i = 0; i < width; ++i)
+        {
+            double sum = 0.0;
+            for (int j = 0; j < width; ++j)
+            {
+                if (i == j)
+                {
+                    continue;
+                }
+                sum += A[i][j] * X0[j];
+            }
+
+            X[i] = (B[i] - sum) / A[i][i];
+        }
+
+        //判断X0和X相差的阈值小于一定量，停止迭代
+        double sum = 0.0;
+        for (int i = 0; i < width; ++i)
+        {
+            diffVec[i] = X[i] - X0[i];
+            sum += diffVec[i];
+        }
+
+        std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
+
+        if (sum <= std::numeric_limits<float>::epsilon())
+        {
+            break;
+        }
+
+        //更新X0
+        memcpy(X0.data(), X.data(), X.size() * sizeof(double));
     }
 }
