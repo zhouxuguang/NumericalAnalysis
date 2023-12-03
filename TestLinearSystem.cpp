@@ -103,6 +103,6 @@ void TestLinearSystemGaussSidel()
     B.push_back(8.3);
     B.push_back(4.2);
 
-    LinearSystem::GaussSidelIteration(A, B, X);
+    LinearSystem::GaussSeidelIteration(A, B, X);
     std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
 }

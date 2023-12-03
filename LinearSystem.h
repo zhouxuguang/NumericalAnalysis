@@ -33,7 +33,7 @@ public:
      * @param B
      * @param X
      */
-    static void GaussSidelIteration(const Matrix& A, const Vector& B, Vector &X);
+    static void GaussSeidelIteration(const Matrix& A, const Vector& B, Vector &X);
 };
 
 

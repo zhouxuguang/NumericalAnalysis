@@ -107,7 +107,7 @@ void LinearSystem::JacobiIteration(const Matrix &A, const Vector &B, Vector &X)
     }
 }
 
-void LinearSystem::GaussSidelIteration(const Matrix &A, const Vector &B, Vector &X)
+void LinearSystem::GaussSeidelIteration(const Matrix &A, const Vector &B, Vector &X)
 {
     int width = A.GetWith();
     int height = A.GetHeight();
