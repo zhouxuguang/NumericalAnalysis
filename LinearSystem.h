@@ -26,6 +26,14 @@ public:
      * @param X
      */
     static void JacobiIteration(const Matrix& A, const Vector& B, Vector &X);
+
+    /**
+     * 高斯塞德尔迭代求解线性方程组
+     * @param A
+     * @param B
+     * @param X
+     */
+    static void GaussSidelIteration(const Matrix& A, const Vector& B, Vector &X);
 };
 
 

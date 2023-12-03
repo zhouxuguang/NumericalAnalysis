@@ -14,4 +14,6 @@ void TestLinearSystem2();
 
 void TestLinearSystemJacobi();
 
+void TestLinearSystemGaussSidel();
+
 #endif //NUMERICALANALYSIS_TESTLINEARSYSTEM_H

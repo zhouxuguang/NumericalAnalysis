@@ -92,12 +92,65 @@ void LinearSystem::JacobiIteration(const Matrix &A, const Vector &B, Vector &X)
         for (int i = 0; i < width; ++i)
         {
             diffVec[i] = X[i] - X0[i];
-            sum += diffVec[i];
+            sum += diffVec[i] * diffVec[i];
         }
 
         std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
 
-        if (sum <= std::numeric_limits<float>::epsilon())
+        if (sum <= std::numeric_limits<double>::epsilon())
+        {
+            break;
+        }
+
+        //更新X0
+        memcpy(X0.data(), X.data(), X.size() * sizeof(double));
+    }
+}
+
+void LinearSystem::GaussSidelIteration(const Matrix &A, const Vector &B, Vector &X)
+{
+    int width = A.GetWith();
+    int height = A.GetHeight();
+    assert(width == height);
+
+    Vector X0;
+    X0.resize(X.size());
+    memset(X0.data(), 0, X0.size() * sizeof(double));
+
+    Vector diffVec;
+    diffVec.resize(X.size());
+
+    while (true)
+    {
+        for (int i = 0; i < width; ++i)
+        {
+            double sum = 0.0;
+
+            //在计算xi的时候，新的xi前面的都计算好了，直接用新的来计算
+            for (int j = 0; j < i; ++j)
+            {
+                sum += A[i][j] * X[j];
+            }
+
+            for (int j = i + 1; j < width; ++j)
+            {
+                sum += A[i][j] * X0[j];
+            }
+
+            X[i] = (B[i] - sum) / A[i][i];
+        }
+
+        //判断X0和X相差的阈值小于一定量，停止迭代
+        double sum = 0.0;
+        for (int i = 0; i < width; ++i)
+        {
+            diffVec[i] = X[i] - X0[i];
+            sum += diffVec[i] * diffVec[i];
+        }
+
+        std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
+
+        if (sum <= std::numeric_limits<double>::epsilon())
         {
             break;
         }

@@ -4,7 +4,7 @@
 
 int main()
 {
-    TestLinearSystemJacobi();
+    TestLinearSystemGaussSidel();
 
     return 0;
 }
