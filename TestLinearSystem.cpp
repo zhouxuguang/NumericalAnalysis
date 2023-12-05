@@ -106,3 +106,39 @@ void TestLinearSystemGaussSidel()
     LinearSystem::GaussSeidelIteration(A, B, X);
     std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
 }
+
+void TestLinearSystemJacobiEigen()
+{
+    Matrix A = Matrix(3, 3);
+//    A[0][0] = 1;
+//    A[0][1] = 3;
+//    A[0][2] = 3;
+//
+//    A[1][0] = -3;
+//    A[1][1] = -5;
+//    A[1][2] = -3;
+//
+//    A[2][0] = 3;
+//    A[2][1] = 3;
+//    A[2][2] = 1;
+
+    A[0][0] = 3;
+    A[0][1] = 1;
+    A[0][2] = 2;
+
+    A[1][0] = 1;
+    A[1][1] = 3;
+    A[1][2] = 4;
+
+    A[2][0] = 2;
+    A[2][1] = 4;
+    A[2][2] = 6;
+
+    Vector X;
+    X.resize(3);
+
+    std::vector<Vector> eigenVecotrs;
+
+    EigenValueSystem::JacobiEigenValue(A, X, eigenVecotrs, 0.000000000001, 100);
+    std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
+}

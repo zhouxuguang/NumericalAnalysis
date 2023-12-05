@@ -10,4 +10,6 @@ add_executable(NumericalAnalysis main.cpp
         LinearSystem.cpp
         LinearSystem.h
         TestLinearSystem.cpp
-        TestLinearSystem.h)
+        TestLinearSystem.h
+        EigenValueSystem.cpp
+        EigenValueSystem.h)
