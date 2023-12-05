@@ -7,7 +7,7 @@
 #include <iostream>
 
 void
-EigenValueSystem::JacobiEigenValue(Matrix &A, Vector &eigenValue, std::vector<Vector> &eigenVectors, double eps,
+EigenValueSystem::JacobiEigenValue(const Matrix &A, Vector &eigenValue, std::vector<Vector> &eigenVectors, double eps,
                                    int maxIterCount)
 {
     int width = A.GetWith();

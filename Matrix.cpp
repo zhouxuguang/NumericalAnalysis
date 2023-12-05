@@ -33,7 +33,7 @@ double *Matrix::operator[](int row)
     return mData + (row * mWidth);
 }
 
-const double *Matrix::operator[](int row) const
+double *Matrix::operator[](int row) const
 {
     return mData + (row * mWidth);
 }

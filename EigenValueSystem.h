@@ -19,7 +19,7 @@ public:
      * @param eps
      * @param maxIterCount
      */
-    static void JacobiEigenValue(Matrix& A,
+    static void JacobiEigenValue(const Matrix& A,
                                  Vector & eigenValue,
                                  std::vector<Vector>& eigenVectors,
                                  double eps,

@@ -25,7 +25,7 @@ public:
 
     double * operator [] (int row);
 
-    const double * operator [] (int row) const;
+    double * operator [] (int row) const;
 
     /**
      * 交换两行的数据
