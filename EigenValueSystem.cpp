@@ -16,6 +16,20 @@ EigenValueSystem::JacobiEigenValue(const Matrix &A, Vector &eigenValue, std::vec
 
     int nDim = width;
 
+    //初始化旋转矩阵U
+    Matrix U(nDim, nDim);
+    for(int i = 0; i < nDim; i ++)
+    {
+        U[i][i] = 1.0;
+        for(int j = 0; j < nDim; j ++)
+        {
+            if (i != j)
+            {
+                U[i][j] = 0.0;
+            }
+        }
+    }
+
     int nCount = 0;		//迭代次数
     while (true)
     {
@@ -80,13 +94,32 @@ EigenValueSystem::JacobiEigenValue(const Matrix &A, Vector &eigenValue, std::vec
             }
         }
 
+        //更新旋转矩阵u的元素
+        for (int i = 0; i < nDim; i ++)
+        {
+            double xx = U[i][p] * c + U[i][q] * d;
+            U[i][q] = -U[i][p] * d + U[i][q] * c;
+            U[i][p] = xx;
+        }
+
         std::cout << "x1 = " << A[0][0] << " x2 = " <<A[1][1] << " x3 = " << A[2][2] << std::endl;
     }
 
-    //计算特征值
+    //计算特征值和特征向量
     for (int i = 0; i < nDim; ++i)
     {
         eigenValue[i] = A[i][i];
+    }
+
+    eigenVectors.resize(nDim);
+
+    for (int j = 0; j < nDim; ++j)
+    {
+        Vector &eigenVector = eigenVectors[j];
+        for (int i = 0; i < nDim; ++i)
+        {
+            eigenVector.push_back(U[i][j]);
+        }
     }
 
 }
