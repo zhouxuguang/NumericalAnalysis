@@ -5,6 +5,7 @@
 #include "LinearSystem.h"
 #include <limits>
 #include <iostream>
+#include <assert.h>
 
 void LinearSystem::GaussElimination(const Matrix &A, const Vector &B, Vector &X)
 {
@@ -84,6 +85,7 @@ void LinearSystem::JacobiIteration(const Matrix &A, const Vector &B, Vector &X)
                 sum += A[i][j] * X0[j];
             }
 
+            // xi(k1)a ( ax(k) ax(k)b)
             X[i] = (B[i] - sum) / A[i][i];
         }
 

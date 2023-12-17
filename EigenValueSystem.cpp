@@ -5,6 +5,7 @@
 #include "EigenValueSystem.h"
 #include <cmath>
 #include <iostream>
+#include <cassert>
 
 void
 EigenValueSystem::JacobiEigenValue(const Matrix &A, Vector &eigenValue, std::vector<Vector> &eigenVectors, double eps,
