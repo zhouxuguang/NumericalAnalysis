@@ -15,6 +15,7 @@ Matrix::Matrix(int width, int height)
     }
 
     mData = new double[width * height];
+    memset(mData, 0, width * height * sizeof(double));
     mWidth = width;
     mHeight = height;
 }
