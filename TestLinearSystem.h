@@ -19,4 +19,6 @@ void TestLinearSystemGaussSidel();
 
 void TestLinearSystemJacobiEigen();
 
+void TestTridiagonalSystem();
+
 #endif //NUMERICALANALYSIS_TESTLINEARSYSTEM_H

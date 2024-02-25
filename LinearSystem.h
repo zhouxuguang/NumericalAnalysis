@@ -34,6 +34,16 @@ public:
      * @param X
      */
     static void GaussSeidelIteration(const Matrix& A, const Vector& B, Vector &X);
+
+    /**
+     * 三对角方程的追赶法，所有的数组元素个数必须相等
+     * @param A 主对角线元素
+     * @param B 主对角线右侧的元素
+     * @param C 主对角线左侧的元素
+     * @param f 右端向量
+     * @param X 结果数组
+     */
+    static void TridiagonalSystem(const Vector& A, const Vector &B, const Vector &C, const Vector& f, Vector& X);
 };
 
 

@@ -142,3 +142,43 @@ void TestLinearSystemJacobiEigen()
     EigenValueSystem::JacobiEigenValue(A, X, eigenVecotrs, 0.000000000001, 100);
     std::cout << "x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
 }
+
+void TestTridiagonalSystem()
+{
+    Vector A;
+    A.push_back(2);
+    A.push_back(2);
+    A.push_back(-7);
+    A.push_back(5);
+    //A.push_back(1);
+
+    Vector B;
+    B.push_back(1);
+    B.push_back(-3);
+    B.push_back(4);
+    B.push_back(0);
+    //B.push_back(0);
+
+    Vector C;
+    C.push_back(0);
+    C.push_back(1);
+    C.push_back(3);
+    C.push_back(2);
+    //C.push_back(-1);
+
+    Vector F;
+    F.push_back(3);
+    F.push_back(-3);
+    F.push_back(-10);
+    F.push_back(2);
+    //F.push_back(1);
+
+    Vector X;
+    LinearSystem::TridiagonalSystem(A, B, C, F, X);
+
+    printf("追赶法测试结果:\n");
+    for (int i = 0; i < X.size(); ++i)
+    {
+        printf("x[%d] = %lf\n", i, X[i]);
+    }
+}

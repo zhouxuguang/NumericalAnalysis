@@ -161,3 +161,38 @@ void LinearSystem::GaussSeidelIteration(const Matrix &A, const Vector &B, Vector
         memcpy(X0.data(), X.data(), X.size() * sizeof(double));
     }
 }
+
+void LinearSystem::TridiagonalSystem(const Vector &A, const Vector &B, const Vector &C, const Vector &f, Vector &X)
+{
+    assert(A.size() == B.size());
+    assert(A.size() == C.size());
+    assert(A.size() == f.size());
+
+    size_t count = A.size();
+
+    //初始化
+    Vector u(count);
+    Vector v(count);
+    Vector y(count);
+
+    u[0] = A[0];
+    v[0] = B[0] / u[0];
+    y[0] = f[0] / u[0];
+
+    //追的循环
+    for (int i = 1; i < count; ++i)
+    {
+        u[i] = A[i] - C[i] * v[i - 1];
+        v[i] = B[i] / u[i];
+        y[i] = (f[i] - C[i] * y[i - 1]) / u[i];
+    }
+
+    X.resize(count);
+    X[count - 1] = y[count - 1];
+
+    //赶的循环
+    for (int i = count - 2; i >= 0; --i)
+    {
+        X[i] = y[i] - v[i] * X[i+1];
+    }
+}

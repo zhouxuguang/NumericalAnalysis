@@ -42,5 +42,7 @@ int main()
     uint32_t base = 31 - clz(a);
     printf("log : %d = %d\n", a, base);
 
+    TestTridiagonalSystem();
+
     return 0;
 }
