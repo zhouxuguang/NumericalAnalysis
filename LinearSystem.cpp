@@ -182,16 +182,20 @@ void LinearSystem::LDLTransposeSovle(const Matrix &A, const Vector &B, Vector &X
             sum += D[r] * L[k][r] * L[k][r];
         }
         D[k] = A[k][k] - sum;
+        //printf("D[%d] = %lf\n", k + 1, D[k]);
 
         for (int i = k + 1; i < n; ++i)
         {
             double sum = 0.0;
             for (int r = 0; r < k; ++r)
             {
-                sum += L[i][r] * L[k][r];
+                sum += D[r] * L[i][r] * L[k][r];
             }
 
+            //printf("sum = %lf\n", sum);
+
             L[i][k] = (A[i][k] - sum) / D[k];
+            //printf("L[%d][%d] = %lf\n", i + 1, k + 1, L[i][k]);
         }
     }
 

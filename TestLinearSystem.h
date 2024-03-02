@@ -23,4 +23,6 @@ void TestTridiagonalSystem();
 
 void TestLDLT();
 
+void TestLDLT1();
+
 #endif //NUMERICALANALYSIS_TESTLINEARSYSTEM_H

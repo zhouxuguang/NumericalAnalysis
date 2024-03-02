@@ -44,6 +44,7 @@ int main()
 
     TestTridiagonalSystem();
     TestLDLT();
+    TestLDLT1();
 
     return 0;
 }

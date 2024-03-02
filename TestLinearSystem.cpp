@@ -209,3 +209,39 @@ void TestLDLT()
     LinearSystem::LDLTransposeSovle(A, B, X);
     std::cout << "LDLT : x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
 }
+
+void TestLDLT1()
+{
+    Matrix A = Matrix(4, 4);
+    A[0][0] = 4;
+    A[0][1] = -2;
+    A[0][2] = 4;
+    A[0][3] = 2;
+
+    A[1][0] = -2;
+    A[1][1] = 10;
+    A[1][2] = -2;
+    A[1][3] = -7;
+
+    A[2][0] = 4;
+    A[2][1] = -2;
+    A[2][2] = 8;
+    A[2][3] = 4;
+
+    A[3][0] = 2;
+    A[3][1] = -7;
+    A[3][2] = 4;
+    A[3][3] = 7;
+
+    Vector X;
+    X.resize(4);
+
+    Vector B;
+    B.push_back(8);
+    B.push_back(2);
+    B.push_back(16);
+    B.push_back(6);
+
+    LinearSystem::LDLTransposeSovle(A, B, X);
+    std::cout << "LDLT1 : x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << " x4 = " << X[3] << std::endl;
+}
