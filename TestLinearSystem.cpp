@@ -182,3 +182,30 @@ void TestTridiagonalSystem()
         printf("x[%d] = %lf\n", i, X[i]);
     }
 }
+
+void TestLDLT()
+{
+    Matrix A = Matrix(3, 3);
+    A[0][0] = 1;
+    A[0][1] = -1;
+    A[0][2] = 1;
+
+    A[1][0] = -1;
+    A[1][1] = 3;
+    A[1][2] = -2;
+
+    A[2][0] = 1;
+    A[2][1] = -2;
+    A[2][2] = 4.5;
+
+    Vector X;
+    X.resize(3);
+
+    Vector B;
+    B.push_back(4);
+    B.push_back(-8);
+    B.push_back(12);
+
+    LinearSystem::LDLTransposeSovle(A, B, X);
+    std::cout << "LDLT : x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << std::endl;
+}

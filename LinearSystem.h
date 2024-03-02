@@ -36,6 +36,14 @@ public:
     static void GaussSeidelIteration(const Matrix& A, const Vector& B, Vector &X);
 
     /**
+     * LDLT分解算法求解对称正定线性方程组
+     * @param A
+     * @param B
+     * @param X
+     */
+    static void LDLTransposeSovle(const Matrix& A, const Vector& B, Vector &X);
+
+    /**
      * 三对角方程的追赶法，所有的数组元素个数必须相等
      * @param A 主对角线元素
      * @param B 主对角线右侧的元素

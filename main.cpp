@@ -43,6 +43,7 @@ int main()
     printf("log : %d = %d\n", a, base);
 
     TestTridiagonalSystem();
+    TestLDLT();
 
     return 0;
 }

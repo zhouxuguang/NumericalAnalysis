@@ -162,6 +162,63 @@ void LinearSystem::GaussSeidelIteration(const Matrix &A, const Vector &B, Vector
     }
 }
 
+void LinearSystem::LDLTransposeSovle(const Matrix &A, const Vector &B, Vector &X)
+{
+    assert(A.GetWith() == A.GetHeight());
+    int n = A.GetWith();
+    Matrix L(n, n);
+
+    Vector D(n);
+    Vector Y(n);
+    Vector Z(n);
+    X.resize(n);
+
+    //分解步骤
+    for (int k = 0; k < n; ++k)
+    {
+        double sum = 0.0;
+        for (int r = 0; r < k; ++r)
+        {
+            sum += D[r] * L[k][r] * L[k][r];
+        }
+        D[k] = A[k][k] - sum;
+
+        for (int i = k + 1; i < n; ++i)
+        {
+            double sum = 0.0;
+            for (int r = 0; r < k; ++r)
+            {
+                sum += L[i][r] * L[k][r];
+            }
+
+            L[i][k] = (A[i][k] - sum) / D[k];
+        }
+    }
+
+    //回代步骤
+    for (int i = 0; i < n; ++i)
+    {
+        double sum = 0.0;
+        for (int j = 0; j < i; ++j)
+        {
+            sum += L[i][j] * Z[j];
+        }
+        Z[i] = B[i] - sum;
+        Y[i] = Z[i] / D[i];
+    }
+
+    for (int i = n - 1; i >= 0; --i)
+    {
+        double sum = 0.0;
+        for (int j = i + 1; j < n; ++j)
+        {
+            sum += L[j][i] * X[j];
+        }
+
+        X[i] = Y[i] - sum;
+    }
+}
+
 void LinearSystem::TridiagonalSystem(const Vector &A, const Vector &B, const Vector &C, const Vector &f, Vector &X)
 {
     assert(A.size() == B.size());

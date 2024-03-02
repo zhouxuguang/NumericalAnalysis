@@ -21,4 +21,6 @@ void TestLinearSystemJacobiEigen();
 
 void TestTridiagonalSystem();
 
+void TestLDLT();
+
 #endif //NUMERICALANALYSIS_TESTLINEARSYSTEM_H
