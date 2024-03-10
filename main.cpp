@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LinearSystem.h"
 #include "TestLinearSystem.h"
+#include "ODE.h"
 
 int clz(uint32_t x)
 {
@@ -33,6 +34,11 @@ int clz(uint32_t x)
     return n;
 }
 
+double f1(double x, double y)
+{
+    return x - y + 1;
+}
+
 int main()
 {
     //TestLinearSystemGaussSidel();
@@ -45,6 +51,9 @@ int main()
     TestTridiagonalSystem();
     TestLDLT();
     TestLDLT1();
+
+    ODE::ForwardEuler(f1, 0, 1, 0.5, 5);
+    ODE::BackwardEuler(f1, 0, 1, 0.5, 5);
 
     return 0;
 }
