@@ -39,6 +39,11 @@ double f1(double x, double y)
     return x - y + 1;
 }
 
+double f2(double x, double y)
+{
+    return x * x * x - (y / x);
+}
+
 int main()
 {
     //TestLinearSystemGaussSidel();
@@ -54,6 +59,7 @@ int main()
 
     ODE::ForwardEuler(f1, 0, 1, 0.5, 5);
     ODE::BackwardEuler(f1, 0, 1, 0.5, 5);
+    ODE::RungeKutta(f2, 1.0, 0.4, 1.9, 9);
 
     return 0;
 }

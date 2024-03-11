@@ -56,3 +56,25 @@ void ODE::BackwardEuler(DiffEquationFunction function, double x0, double y0, dou
         printf("i = %d, x = %lf, y = %lf\n", i, x, y);
     }
 }
+
+void ODE::RungeKutta(DiffEquationFunction function, double x0, double y0, double xn, int n)
+{
+    double h = (xn - x0) / n;
+    double x = x0;
+    double y = y0;
+
+    int i = 0;
+    printf("Runge-Kutta方法\n");
+    printf("i = %d, x = %lf, y = %lf\n", i, x, y);
+    for (i = 1;  i <= n; i ++)
+    {
+        double k1 = function(x, y);
+        double k2 = function(x + 0.5 * h, y + 0.5 * h * k1);
+        double k3 = function(x + 0.5 * h, y + 0.5 * h * k2);
+        double k4 = function(x + h, y + h * k3);
+
+        y = y + (h * (k1 + 2 * k2 + 2 * k3 + k4) / 6.0);
+        x += h;
+        printf("i = %d, x = %lf, y = %lf\n", i, x, y);
+    }
+}
