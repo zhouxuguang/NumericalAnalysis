@@ -14,4 +14,6 @@ add_executable(NumericalAnalysis main.cpp
         EigenValueSystem.cpp
         EigenValueSystem.h
         ODE.cpp
-        ODE.h)
+        ODE.h
+        Interpolation.cpp
+        Interpolation.h)
