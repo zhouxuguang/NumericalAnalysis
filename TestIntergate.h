@@ -1,0 +1,12 @@
+//
+// Created by zhouxuguang on 2024/3/30.
+//
+
+#ifndef NUMERICALANALYSIS_TESTINTERGATE_H
+#define NUMERICALANALYSIS_TESTINTERGATE_H
+
+
+void TestIntergate();
+
+
+#endif //NUMERICALANALYSIS_TESTINTERGATE_H

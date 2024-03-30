@@ -16,4 +16,8 @@ add_executable(NumericalAnalysis main.cpp
         ODE.cpp
         ODE.h
         Interpolation.cpp
-        Interpolation.h)
+        Interpolation.h
+        Intergate.cpp
+        Intergate.h
+        TestIntergate.cpp
+        TestIntergate.h)

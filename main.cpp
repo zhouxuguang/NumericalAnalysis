@@ -2,6 +2,7 @@
 #include "LinearSystem.h"
 #include "TestLinearSystem.h"
 #include "ODE.h"
+#include "TestIntergate.h"
 
 int clz(uint32_t x)
 {
@@ -60,6 +61,8 @@ int main()
     ODE::ForwardEuler(f1, 0, 1, 0.5, 5);
     ODE::BackwardEuler(f1, 0, 1, 0.5, 5);
     ODE::RungeKutta(f2, 1.0, 0.4, 1.9, 9);
+
+    TestIntergate();
 
     return 0;
 }
