@@ -34,6 +34,14 @@ public:
      * @param X
      */
     static void GaussSeidelIteration(const Matrix& A, const Vector& B, Vector &X);
+    
+    /**
+     * SOR迭代求解线性方程组
+     * @param A
+     * @param B
+     * @param X
+     */
+    static void SORIteration(const Matrix& A, const Vector& B, Vector &X);
 
     /**
      * LDLT分解算法求解对称正定线性方程组

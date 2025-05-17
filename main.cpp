@@ -47,8 +47,9 @@ double f2(double x, double y)
 
 int main()
 {
-    //TestLinearSystemGaussSidel();
-    TestLinearSystemJacobiEigen();
+    TestLinearSystemGaussSidel();
+    return 0;
+    //TestLinearSystemJacobiEigen();
 
     uint32_t a = 20;
     uint32_t base = 31 - clz(a);
