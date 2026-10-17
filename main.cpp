@@ -3,6 +3,7 @@
 #include "TestLinearSystem.h"
 #include "ODE.h"
 #include "TestIntergate.h"
+#include "DFT.h"
 
 int clz(uint32_t x)
 {
@@ -48,6 +49,7 @@ double f2(double x, double y)
 int main()
 {
     TestLinearSystemGaussSidel();
+    TestDFT();
     return 0;
     //TestLinearSystemJacobiEigen();
 

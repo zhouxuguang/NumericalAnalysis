@@ -20,4 +20,6 @@ add_executable(NumericalAnalysis main.cpp
         Intergate.cpp
         Intergate.h
         TestIntergate.cpp
-        TestIntergate.h)
+        TestIntergate.h
+        DFT.cpp
+        DFT.h)
