@@ -4,6 +4,7 @@
 #include "ODE.h"
 #include "TestIntergate.h"
 #include "DFT.h"
+#include "FFT.h"
 
 int clz(uint32_t x)
 {
@@ -50,6 +51,7 @@ int main()
 {
     TestLinearSystemGaussSidel();
     TestDFT();
+    TestFFT();
     return 0;
     //TestLinearSystemJacobiEigen();
 
