@@ -25,4 +25,6 @@ void TestLDLT();
 
 void TestLDLT1();
 
+void TestHouseholder();
+
 #endif //NUMERICALANALYSIS_TESTLINEARSYSTEM_H

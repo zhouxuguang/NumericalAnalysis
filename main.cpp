@@ -52,6 +52,7 @@ int main()
     TestLinearSystemGaussSidel();
     TestDFT();
     TestFFT();
+    TestHouseholder();
     return 0;
     //TestLinearSystemJacobiEigen();
 

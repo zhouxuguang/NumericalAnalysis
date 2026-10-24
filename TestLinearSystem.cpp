@@ -3,6 +3,10 @@
 //
 
 #include "TestLinearSystem.h"
+#include <cmath>
+#include <cstdio>
+#include <cassert>
+#include <algorithm>
 
 void TestLinearSystem1()
 {
@@ -244,4 +248,120 @@ void TestLDLT1()
 
     LinearSystem::LDLTransposeSovle(A, B, X);
     std::cout << "LDLT1 : x1 = " << X[0] << " x2 = " << X[1] << " x3 = " << X[2] << " x4 = " << X[3] << std::endl;
+}
+
+//由反射向量v和标量beta构造Householder矩阵 H = I - beta * v * v^T
+static void BuildHouseholderMatrix(const Vector &v, double beta, Matrix &H)
+{
+    int n = (int)v.size();
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            H[i][j] = (i == j ? 1.0 : 0.0) - beta * v[i] * v[j];
+        }
+    }
+}
+
+//验证x的Householder变换：H * x = alpha * e1 且 H 为正交阵
+static void CheckHouseholder(const Vector &x)
+{
+    int n = (int)x.size();
+
+    Vector v;
+    double beta = 0.0;
+    EigenValueSystem::Householder(x, v, beta);
+
+    Matrix H(n, n);
+    BuildHouseholderMatrix(v, beta, H);
+
+    //计算||x||，实现总是把x反射到 +||x|| * e1
+    double sigma = 0.0;
+    for (int i = 0; i < n; ++i)
+    {
+        sigma += x[i] * x[i];
+    }
+    sigma = sqrt(sigma);
+    double alpha = sigma;
+
+    printf("Householder: x = (");
+    for (int i = 0; i < n; ++i)
+    {
+        printf("%s%g", (i == 0 ? "" : ", "), x[i]);
+    }
+    printf("), ||x|| = %g\n", sigma);
+
+    printf("  v = (");
+    for (int i = 0; i < n; ++i)
+    {
+        printf("%s%g", (i == 0 ? "" : ", "), v[i]);
+    }
+    printf("), beta = %g\n", beta);
+
+    //1、验证 H * x = alpha * e1
+    double transformError = 0.0;
+    for (int i = 0; i < n; ++i)
+    {
+        double sum = 0.0;
+        for (int j = 0; j < n; ++j)
+        {
+            sum += H[i][j] * x[j];
+        }
+        double target = (i == 0) ? alpha : 0.0;
+        transformError = std::max(transformError, fabs(sum - target));
+    }
+
+    //2、验证 H^T * H = I，即H为正交阵
+    double orthogonalError = 0.0;
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            double sum = 0.0;
+            for (int k = 0; k < n; ++k)
+            {
+                sum += H[k][i] * H[k][j];
+            }
+            orthogonalError = std::max(orthogonalError, fabs(sum - (i == j ? 1.0 : 0.0)));
+        }
+    }
+
+    printf("  max|H*x - alpha*e1| = %e, max|H^T*H - I| = %e\n\n", transformError, orthogonalError);
+    assert(transformError < 1e-12);
+    assert(orthogonalError < 1e-12);
+}
+
+void TestHouseholder()
+{
+    //2维向量x = (3, 4)^T，H * x 应为 (5, 0)^T
+    Vector x2;
+    x2.push_back(3);
+    x2.push_back(4);
+    CheckHouseholder(x2);
+
+    //4维一般向量
+    Vector x4;
+    x4.push_back(1);
+    x4.push_back(-2);
+    x4.push_back(3);
+    x4.push_back(4);
+    CheckHouseholder(x4);
+
+    //尾部元素全为0且x[0] > 0，此时H退化为单位阵
+    Vector xPositive;
+    xPositive.push_back(5);
+    xPositive.push_back(0);
+    xPositive.push_back(0);
+    CheckHouseholder(xPositive);
+
+    //尾部元素全为0且x[0] < 0，此时H = diag(-1, 1, 1)
+    Vector xNegative;
+    xNegative.push_back(-5);
+    xNegative.push_back(0);
+    xNegative.push_back(0);
+    CheckHouseholder(xNegative);
+
+    //零向量，此时H退化为单位阵
+    Vector x0(3, 0.0);
+    CheckHouseholder(x0);
 }

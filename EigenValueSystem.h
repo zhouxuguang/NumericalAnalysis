@@ -24,6 +24,17 @@ public:
                                  std::vector<Vector>& eigenVectors,
                                  double eps,
                                  int maxIterCount);
+
+    /**
+     * 计算向量x的Householder变换（初等反射）
+     * 求单位化前的反射向量v和标量beta，使得
+     * H = I - beta * v * v^T 满足 H * x = ||x|| * e1
+     * 注意：若x为零向量，则返回 v = 0, beta = 0，此时H为单位阵
+     * @param x     输入向量（长度n，且n > 0）
+     * @param v     输出的Householder向量（长度n）
+     * @param beta  输出标量，H = I - beta * v * v^T
+     */
+    static void Householder(const Vector& x, Vector& v, double& beta);
 };
 
 

@@ -124,3 +124,60 @@ EigenValueSystem::JacobiEigenValue(const Matrix &A, Vector &eigenValue, std::vec
     }
 
 }
+
+//https://math.ecnu.edu.cn/jypan/Teaching/MC/main_mc_202608s.pdf
+void EigenValueSystem::Householder(const Vector &x, Vector &v, double &beta)
+{
+    int nDim = x.size();
+    v.resize(nDim);
+
+    double normX = 0.0;
+    for (int i = 0; i < nDim; ++i)
+    {
+        normX += x[i] * x[i];
+    }
+    normX = sqrt(normX);
+
+    double simga = 0.0;
+    for (int i = 1; i < nDim; ++i)
+    {
+        simga += x[i] * x[i];
+    }
+    
+    v = x;
+
+    //零向量：H退化为单位阵
+    if (normX == 0.0)
+    {
+        beta = 0.0;
+        return;
+    }
+
+    if (simga == 0.0 && x[0] > 0)
+    {
+        v[0] = 0.0;
+        beta = 0.0;
+    }
+    
+    else if (simga == 0.0 && x[0] < 0)
+    {
+        v[0] = 2.0 * x[0];
+        beta = 2.0 / (v[0] * v[0]);
+    }
+    
+    else
+    {
+        double alpha = normX;
+        if (x[0] <= 0.0)
+        {
+            v[0] = x[0] - alpha;
+        }
+        else
+        {
+            v[0] = -simga / (x[0] + alpha);
+        }
+        
+        beta = 2.0 / (v[0] * v[0] + simga);
+    }
+    
+}
